@@ -1,6 +1,6 @@
 import { z } from "zod";
 import { prisma } from "../db/client";
-import { InferQueryOutput } from "../../utils/trpc";
+import { inferQueryResponses } from "../../utils/trpc";
 import { createRouter } from "./context";
 import { createPostValidation } from "../../utils/validations";
 
@@ -28,5 +28,5 @@ export const postsRouter = createRouter()
 
 
 
-export type GetPostsArrType = InferQueryOutput<"get-all-posts">;
+export type GetPostsArrType = inferQueryResponses<"posts.get-all-posts">;
 export type GetPostType = GetPostsArrType[number];

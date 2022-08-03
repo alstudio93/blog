@@ -12,6 +12,6 @@ export const trpc = createReactQueryHooks<AppRouter>();
 
 export type TQuery = keyof AppRouter['_def']['queries']
 
-export type InferQueryOutput<TRouteKey extends TQuery> = inferProcedureOutput<
-    AppRouter['_def']['queries'][TRouteKey]
->
+export type inferQueryResponses<
+    TRouteKey extends keyof AppRouter["_def"]["queries"]
+    > = inferProcedureOutput<AppRouter["_def"]["queries"][TRouteKey]>;

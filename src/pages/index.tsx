@@ -12,9 +12,12 @@ import { GetPostType } from "../server/router/posts";
 import RightNav from "../components/sidebars/RightNav";
 import PostButton from "../components/sections/PostButton";
 import PostForm from "../components/sections/PostForm";
+import useModal from "../utils/hooks/useModal";
 
 
 const Home: NextPage = () => {
+  const { open, setOpen } = useModal(); // form
+  const { open: openMenu, setOpen: setOpenMenu } = useModal(); // menu
   const { data, isLoading } = trpc.useQuery(['posts.get-all-posts'])
   return (
     <>
@@ -30,7 +33,7 @@ const Home: NextPage = () => {
 
           <div className="md:col-span-2">
             <PostButton />
-            <PostForm />
+            <PostForm type="create" open={open} setOpen={setOpen} />
             <div className="mt-5" />
             <SearchInput placeholder="Search Posts" />
 

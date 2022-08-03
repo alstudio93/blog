@@ -48,6 +48,24 @@ export const postsRouter = createRouter()
             })
         }
     })
+    .mutation("edit-post", {
+        input: z.object({
+            id: z.string(),
+            title: z.string().min(6).max(200),
+            description: z.string().min(6).max(2000).trim(),
+        }),
+        async resolve({ input, ctx }) {
+            return await ctx.prisma.post.update({
+                where: {
+                    id: input.id
+                },
+                data: {
+                    title: input.title,
+                    description: input.description
+                }
+            })
+        }
+    })
     .mutation("delete", {
         input: z.object({
             id: z.string(),

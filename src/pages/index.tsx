@@ -11,6 +11,7 @@ import { trpc } from "../utils/trpc";
 import { GetPostType } from "../server/router/posts";
 import RightNav from "../components/sidebars/RightNav";
 import PostButton from "../components/sections/PostButton";
+import PostForm from "../components/sections/PostForm";
 
 
 const Home: NextPage = () => {
@@ -29,6 +30,7 @@ const Home: NextPage = () => {
 
           <div className="md:col-span-2">
             <PostButton />
+            <PostForm />
             <div className="mt-5" />
             <SearchInput placeholder="Search Posts" />
 

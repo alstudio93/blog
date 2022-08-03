@@ -21,6 +21,48 @@ export const postsRouter = createRouter()
             })
         }
     })
+    .query("get-by-id", {
+        input: z.object({
+            id: z.string(),
+        }),
+        async resolve({ input, ctx }) {
+            const fullPostInfo = await ctx.prisma.post.findFirst({
+                where: {
+                    id: input.id
+                },
+            });
+
+            return {
+                ...fullPostInfo
+            }
+        }
+    })
+    .mutation("create", {
+        input: createPostValidation,
+        async resolve({ input, ctx }) {
+            return await ctx.prisma.post.create({
+                data: {
+                    title: input.title,
+                    description: input.description,
+                }
+            })
+        }
+    })
+    .mutation("delete", {
+        input: z.object({
+            id: z.string(),
+        }),
+        async resolve({ input, ctx }) {
+            const post = await ctx.prisma.post.delete({
+                where: {
+                    id: input.id
+                }
+            });
+            return {
+                post
+            }
+        }
+    })
 
 
 

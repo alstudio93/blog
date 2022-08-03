@@ -39,7 +39,7 @@ const Home: NextPage = () => {
 
             {
               data?.map((post) => (
-                <PostCard {...(post as GetPostType)} />
+                <PostCard key={post.id} {...(post as GetPostType)} />
               ))
             }
 
